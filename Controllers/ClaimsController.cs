@@ -27,17 +27,26 @@ public class ClaimsController : ControllerBase
 [HttpGet("GetClaimById")] 
  public Claim Get(int claimId) 
  {    
+    _logger.LogInformation("Metode GetClaimById called at {DT}",  
+         DateTime.UtcNow.ToLongTimeString()); 
+
     return _claims.Where(c => c.ClaimId == claimId).First(); 
  } 
  [HttpPost("PostClaim")]
  public Claim? Post(Claim claim)
  {
+    _logger.LogInformation("Metode PostClaim called at {DT}",  
+         DateTime.UtcNow.ToLongTimeString()); 
+
+     if(_claims.Where(x => x.ClaimId == claim.ClaimId).Count() != 0) {
+        _logger.LogError("Claim ID already exists in the list!");
+        return null;
+     }   
+     else{
     _claims.Add(claim);
-    if(claim == _claims.Last()){return claim;}
-    else
-    {
-            return null;
-    }
+    _logger.LogInformation("Claim Succecfully added to list at {DT}", DateTime.UtcNow.ToLongTimeString());
+    return claim;
+     }
  }
 }
 
