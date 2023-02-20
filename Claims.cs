@@ -7,4 +7,3 @@ public class Claim
     public int CustomerId { get; set; } 
     public string? Description { get; set; } 
 } 
-

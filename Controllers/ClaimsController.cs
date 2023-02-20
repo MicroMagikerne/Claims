@@ -29,4 +29,16 @@ public class ClaimsController : ControllerBase
  {    
     return _claims.Where(c => c.ClaimId == claimId).First(); 
  } 
+ [HttpPost("PostClaim")]
+ public Claim? Post(Claim claim)
+ {
+    _claims.Add(claim);
+    if(claim == _claims.Last()){return claim;}
+    else
+    {
+            return null;
+    }
+ }
 }
+
+
