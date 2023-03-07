@@ -24,7 +24,7 @@ public class ClaimsController : ControllerBase
         _logger = logger;
     }
 
-[HttpGet("GetClaimById")] 
+[HttpGet("GetClaimById/(claimId)}")] 
  public Claim Get(int claimId) 
  {    
     _logger.LogInformation("Metode GetClaimById called at {DT}",  
